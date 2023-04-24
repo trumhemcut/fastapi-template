@@ -1,0 +1,3 @@
+name: fastapi
+dependencies:
+  - python=3.9
