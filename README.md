@@ -26,5 +26,6 @@ You can then open the website at http://localhost:8000
 ```bash
 alembic init -t async migrations
 alembic revision --autogenerate -m "init"
+alembic revision --autogenerate -m "add new tables"
 alembic upgrade head
 ```
