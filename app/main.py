@@ -7,12 +7,6 @@ from .models import Company
 
 app = FastAPI()
 
-
-@app.get("/ping")
-async def pong():
-    return {"ping": "pong!"}
-
-
 @app.get("/companies", response_model=list[Company])
 async def get_songs(session: AsyncSession = Depends(get_session)):
     result = await session.execute(select(Company))

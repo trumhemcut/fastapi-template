@@ -10,7 +10,7 @@ services:
     ports:
       - 8000:8000
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@postgres-server:5432/postgres
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@postgres-server:5432/postgres
     depends_on:
       - postgres-server
 
