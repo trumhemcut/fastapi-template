@@ -1,3 +1,4 @@
+import logging
 from fastapi import APIRouter, Depends, Request
 from fastapi_microsoft_identity import requires_auth, validate_scope
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -14,8 +15,12 @@ router = APIRouter()
 async def get_users(request: Request, session: AsyncSession = Depends(get_session)):
     validate_scope(request=request, required_scope="Data.Read")
 
+    logging.info('Getting tasks')
+
     result = await session.execute(select(Task))
     tasks = result.scalars().all()
+
+    logging.info('Finished getting tasks')
     return tasks
 
 
@@ -23,6 +28,9 @@ async def get_users(request: Request, session: AsyncSession = Depends(get_sessio
 @requires_auth
 async def add_user(request: Request, task: Task, session: AsyncSession = Depends(get_session)):
     validate_scope(request=request, required_scope="Data.Write")
+
+    logging.info('Adding task')
+
     task = Task(
         description=task.description,
         priority=task.priority,
@@ -33,4 +41,6 @@ async def add_user(request: Request, task: Task, session: AsyncSession = Depends
     session.add(task)
     await session.commit()
     await session.refresh(task)
+
+    logging.info('Finished adding task')
     return task

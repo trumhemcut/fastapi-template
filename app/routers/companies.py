@@ -1,3 +1,4 @@
+import logging
 from fastapi import APIRouter, Depends, Request
 from fastapi_microsoft_identity import requires_auth, validate_scope
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -11,10 +12,13 @@ router = APIRouter()
 @router.get("/companies", response_model=list[Company])
 @requires_auth
 async def get_companies(request: Request, session: AsyncSession = Depends(get_session)):
+    logging.info('Validate scope')
     validate_scope(request=request, required_scope="Data.Read")
 
+    logging.info('Getting companies')
     result = await session.execute(select(Company))
     companies = result.scalars().all()
+    logging.info('Finished getting companies')
     return companies
 
 
@@ -22,6 +26,8 @@ async def get_companies(request: Request, session: AsyncSession = Depends(get_se
 async def add_company(request: Request, company: Company, session: AsyncSession = Depends(get_session)):
     validate_scope(request=request, required_scope="Data.Write")
 
+    logging.info('Adding company')
+    
     company = Company(
         name=company.name,
         description=company.description,
@@ -30,4 +36,6 @@ async def add_company(request: Request, company: Company, session: AsyncSession 
     session.add(company)
     await session.commit()
     await session.refresh(company)
+
+    logging.info('Finished adding company')
     return company
