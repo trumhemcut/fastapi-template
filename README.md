@@ -1,4 +1,5 @@
-# Fast Assignment
+# FastAPI assignment
+This is a simple project to demonstrate the usage of FastAPI.
 
 ## Build dev environment with conda
 
