@@ -15,5 +15,5 @@ def test_create_user():
         "rating": 1
     }
     response = client.post("/users", json=json.dumps(company))
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert response.json() == {"message": "Hello Tien Nguyen :D"}
