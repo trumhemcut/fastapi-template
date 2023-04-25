@@ -5,3 +5,4 @@ asyncpg==0.24.0
 alembic==1.7.1
 httpx==0.24.0
 pytest==7.3.1
+fastapi-microsoft-identity==0.1.6

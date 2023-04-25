@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
+from fastapi_microsoft_identity import requires_auth, validate_scope
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select
 
@@ -9,14 +10,19 @@ router = APIRouter()
 
 
 @router.get("/tasks", response_model=list[Task])
-async def get_users(session: AsyncSession = Depends(get_session)):
+@requires_auth
+async def get_users(request: Request, session: AsyncSession = Depends(get_session)):
+    validate_scope(request=request, required_scope="Data.Read")
+
     result = await session.execute(select(Task))
     tasks = result.scalars().all()
     return tasks
 
 
 @router.post("/tasks")
-async def add_user(task: Task, session: AsyncSession = Depends(get_session)):
+@requires_auth
+async def add_user(request: Request, task: Task, session: AsyncSession = Depends(get_session)):
+    validate_scope(request=request, required_scope="Data.Write")
     task = Task(
         description=task.description,
         priority=task.priority,

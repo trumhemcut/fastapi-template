@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_microsoft_identity import initialize
 
+from .config import settings
 from .routers import companies
 from .routers import users
 from .routers import tasks
+
+initialize(settings.tenant_id, settings.client_id)
 
 app = FastAPI()
 app.include_router(companies.router)
