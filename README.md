@@ -10,7 +10,7 @@ conda activate ./.conda
 ```
 
 ## Bring the system up
-
+You need run data migration first to make sure the database is ready.
 ### Run via Docker Compose
 ```bash
 docker-compose up -d --build
@@ -18,6 +18,7 @@ docker-compose up -d --build
 
 ### Run locally
 ```bash
+pip install -r app/requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -29,4 +30,9 @@ alembic init -t async migrations
 alembic revision --autogenerate -m "init"
 alembic revision --autogenerate -m "add new tables"
 alembic upgrade head
+```
+
+## Tests
+```bash
+python -m pytest ./tests
 ```
