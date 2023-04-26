@@ -1,0 +1,10 @@
+.dockerignore
+Dockerfile
+.vscode
+.pytest_cache
+.conda
+.tests
+docker-compose.yml
+.env
+**/__pycache__
+.git

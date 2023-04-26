@@ -10,7 +10,7 @@ from .routers import tasks
 
 logging.basicConfig(level=logging.INFO)
 
-initialize(settings.tenant_id, settings.client_id)
+initialize(settings.TENANT_ID, settings.CLIENT_ID)
 
 app = FastAPI()
 app.include_router(companies.router)

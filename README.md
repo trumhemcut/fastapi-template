@@ -9,6 +9,7 @@ Features:
 - [x] Docker Compose
 - [x] Alembic migrations
 - [x] CORS enabled
+- [x] dotenv config
 - [ ] CI/CD with GitHub Actions
 - [ ] Dapr
 - [ ] Add one more service
