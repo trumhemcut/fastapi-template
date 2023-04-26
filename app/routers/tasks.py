@@ -1,5 +1,5 @@
 import logging
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, status
 from fastapi_microsoft_identity import requires_auth, validate_scope
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select
@@ -24,7 +24,7 @@ async def get_users(request: Request, session: AsyncSession = Depends(get_sessio
     return tasks
 
 
-@router.post("/tasks")
+@router.post("/tasks", status_code=status.HTTP_201_CREATED, response_model=Task)
 @requires_auth
 async def add_user(request: Request, task: Task, session: AsyncSession = Depends(get_session)):
     validate_scope(request=request, required_scope="Data.Write")
