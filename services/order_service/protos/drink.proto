@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package coffee_shop;
+
+message Drink {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+}
+
+service DrinkService {
+  rpc ListDrinks (ListDrinksRequest) returns (ListDrinksResponse) {}
+  rpc GetDrink (GetDrinkRequest) returns (Drink) {}
+  rpc CreateDrink (CreateDrinkRequest) returns (Drink) {}
+  rpc UpdateDrink (UpdateDrinkRequest) returns (Drink) {}
+  rpc DeleteDrink (DeleteDrinkRequest) returns (DeleteDrinkResponse) {}
+}
+
+message ListDrinksRequest {}
+
+message ListDrinksResponse {
+  repeated Drink drinks = 1;
+}
+
+message GetDrinkRequest {
+  string id = 1;
+}
+
+message CreateDrinkRequest {
+  string name = 1;
+  string description = 2;
+  double price = 3;
+}
+
+message UpdateDrinkRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+}
+
+message DeleteDrinkRequest {
+  string id = 1;
+}
+
+message DeleteDrinkResponse {}
