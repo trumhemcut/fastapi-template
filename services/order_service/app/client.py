@@ -18,9 +18,9 @@ from __future__ import print_function
 import logging
 
 import grpc
-from services.protos import helloworld_pb2
-from services.protos import helloworld_pb2_grpc
-from services.protos import drink_pb2_grpc, drink_pb2
+from protos import helloworld_pb2
+from protos import helloworld_pb2_grpc
+from protos import drink_pb2_grpc, drink_pb2
 
 
 def run():

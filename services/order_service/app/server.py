@@ -1,7 +1,7 @@
 import asyncio
 import grpc
 
-from services.protos import helloworld_pb2_grpc, helloworld_pb2, drink_pb2_grpc
+from protos import helloworld_pb2_grpc, helloworld_pb2, drink_pb2_grpc
 from config import settings
 from logger import logger
 
