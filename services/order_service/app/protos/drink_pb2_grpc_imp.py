@@ -1,21 +1,11 @@
 import grpc
-from sqlmodel import select
 import drink_pb2
 import drink_pb2_grpc
 
-from sqlalchemy.ext.asyncio import AsyncSession
 from services.drink_service import DrinkService
-from sqlalchemy.orm import sessionmaker
-
-import database
 
 
 class DrinkServiceGrpcImp(drink_pb2_grpc.DrinkServiceServicer):
-    def __init__(self):
-        self.session_factory = sessionmaker(
-            database.engine, class_=AsyncSession, expire_on_commit=False
-        )
-
     def ListDrinks(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
