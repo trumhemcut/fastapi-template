@@ -1,23 +1,19 @@
-from typing import List
-
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select
 
+import database
 from models.drink import Drink
 
 
-async def get_drink(session: AsyncSession, drink_id: str) -> Drink:
-    """Get a drink by ID"""
-    return await session.get(Drink, drink_id)
+class DrinkService():
+    def __init__(self):
+        self.session_factory = sessionmaker(
+            database.engine, class_=AsyncSession, expire_on_commit=False
+        )
 
-
-async def list_drinks(session: AsyncSession) -> List[Drink]:
-    """List all drinks"""
-    return await session.execute(select(Drink)).scalars().all()
-
-
-async def delete_drink(session: AsyncSession, drink_id: str) -> None:
-    """Delete a drink"""
-    db_drink = await session.get(Drink, drink_id)
-    session.delete(db_drink)
-    await session.commit()
+    async def GetDrink(self, drink_id: int):
+        async with self.session_factory() as session:
+            result = await session.execute(select(Drink).where(Drink.id == drink_id))
+            drink = result.scalars().first()
+            return drink
