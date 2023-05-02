@@ -4,16 +4,16 @@ This is a simple project to demonstrate the usage of FastAPI.
 Features:
 - [x] CRUD operations with PostgreSQL, Alembic and SQLAlchemy, Asyncio support.
 - [x] FastAPI
+- [x] GRPC
 - [x] Authentication with OAuth2 (Azure AD )
 - [x] Unit tests
 - [x] Docker Compose
 - [x] Alembic migrations
 - [x] CORS enabled
 - [x] dotenv config
+- [ ] Add one more service
 - [ ] CI/CD with GitHub Actions
 - [ ] Dapr
-- [ ] Add one more service
-
 
 ## Build dev environment with conda
 

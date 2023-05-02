@@ -1,7 +1,7 @@
 import asyncio
 import grpc
 
-from protos import helloworld_pb2_grpc, helloworld_pb2, drink_pb2_grpc
+from protos import helloworld_pb2_grpc, helloworld_pb2, drink_pb2_grpc, drink_pb2_grpc_imp
 from config import settings
 from logger import logger
 
@@ -14,7 +14,7 @@ async def serve() -> None:
     server = grpc.aio.server()
 
     helloworld_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
-    drink_pb2_grpc.add_DrinkServiceServicer_to_server(drink_pb2_grpc.DrinkServiceServicer(), server)
+    drink_pb2_grpc.add_DrinkServiceServicer_to_server(drink_pb2_grpc_imp.DrinkServiceGrpcImp(), server)
     
     port = settings.PORT
     server.add_insecure_port(f"[::]:{port}")

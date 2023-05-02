@@ -52,10 +52,9 @@ class DrinkServiceServicer(object):
 
     def GetDrink(self, request, context):
         """Missing associated documentation comment in .proto file."""
-        return drink__pb2.Drink(id='1', name='Ice Coffee', description='Wellnown coffee', price=2.5)
-        # context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        # context.set_details('Method not implemented!')
-        # raise NotImplementedError('Method not implemented!')
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def CreateDrink(self, request, context):
         """Missing associated documentation comment in .proto file."""

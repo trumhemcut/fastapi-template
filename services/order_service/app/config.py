@@ -1,10 +1,9 @@
 from pydantic import BaseSettings
 
-
 class Settings(BaseSettings):
-    DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/coffee_shop"
-    LOG_LEVEL: str = "INFO"
-    PORT: int = 50051
+    DATABASE_URL: str
+    LOG_LEVEL: str
+    PORT: int
 
     class Config:
         env_file = ".env"
